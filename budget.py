@@ -32,7 +32,7 @@ class Category:
                 output += '{:.2f}'.format(led['amount'])
             output += '\n'
         # A line displaying the category total.
-        output += 'Total '
+        output += 'Total: '
         output += '{:.2f}'.format(self.get_balance())
 
         return output

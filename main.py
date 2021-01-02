@@ -13,6 +13,8 @@ clothing.withdraw(100)
 auto = budget.Category("Auto")
 auto.deposit(1000, "initial deposit")
 auto.withdraw(15)
+food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
+food.transfer(20, clothing)
 
 print(food)
 print(clothing)
