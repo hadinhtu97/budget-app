@@ -15,7 +15,9 @@ auto.withdraw(15)
 food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
 food.transfer(20, clothing)
 
-print(food)
-print(clothing)
 
+print(food)
+print()
+print(clothing)
+print()
 print(create_spend_chart([food, clothing, auto]))

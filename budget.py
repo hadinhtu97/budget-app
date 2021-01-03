@@ -69,4 +69,63 @@ class Category:
 
 
 def create_spend_chart(categories):
-    pass
+    listCat = list()
+    # listCat : list name and persent of each category
+    for cat in categories:
+        totalDeposit = float(0)
+        totalWithdraw = float(0)
+        for led in cat.ledger:
+            if led['amount'] > 0:
+                totalDeposit += led['amount']
+            else:
+                totalWithdraw += abs(led['amount'])
+        persent = totalWithdraw/totalDeposit * 100
+        persent = persent - persent % 10
+        persent = int(persent)
+        listCat.append([cat.name, persent])
+    # print(listCat)
+    # [['Food', 10], ['Clothing', 30], ['Auto', 0]]
+
+    # y : length height of char
+    y = 0
+    maxLenOfCatName = 0
+    for li in listCat:
+        if maxLenOfCatName < len(li[0]):
+            maxLenOfCatName = len(li[0])
+    # 12: 11 line from 100 to 0 percent, 1 line for '----'
+    y = 12 + maxLenOfCatName
+
+    # print barchar
+    char = str()
+    char += 'Percentage spent by category\n'
+    for j in range(y):
+        # print 100 to 0 %
+        if 0 <= j and j <= 10:
+            persent = 100 - 10*j
+            space = 3 - len(str(persent))
+            for k in range(space):
+                char += ' '
+            char += str(persent)
+            char += '| '
+            for i in range(len(listCat)):
+                if listCat[i][1] >= persent:
+                    char += 'o  '
+                else:
+                    char += '   '
+        # print '-----'
+        elif j == 11:
+            char += '    -'
+            for i in range(len(listCat)):
+                char += '---'
+        # print cat name
+        else:
+            char += '     '
+            index = j - 12
+            for i in range(len(listCat)):
+                if index <= len(listCat[i][0]) - 1:
+                    char += listCat[i][0][index]
+                    char += '  '
+                else:
+                    char += '   '
+        char += '\n'
+    return char
